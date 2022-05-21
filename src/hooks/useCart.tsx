@@ -61,9 +61,17 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const removeProduct = (productId: number) => {
     try {
-      // TODO
+      const currentCart = [...cart];
+      const foundIndex = currentCart.findIndex((product) => product.id === productId);
+
+      if (foundIndex !== -1) {
+        currentCart.splice(foundIndex, 1);
+        setCart(currentCart);
+      } else {
+        throw Error();
+      }
     } catch {
-      // TODO
+      toast.error('Erro na remoção do produto');
     }
   };
 
